@@ -7,11 +7,18 @@ import {
   FaSolidChevronCircleRight,
   FaSolidVolumeUp,
 } from "../Icons/icon";
+import { useSelector } from "react-redux";
 
-export default function Question({ tab, active }) {
-  const [qactive, setQActive] = useState(active);
+export default function Question({ active }) {
+
+  const tab = useSelector((state) => state.tab.tab);
+  console.log(tab);
+
   const [data, setData] = useState([]);
+  const [qactive, setQActive] = useState(active);
   const [question, setQuestion] = useState([]);
+  // const [activeTab, setActiveTab] = useState(tab);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,19 +33,19 @@ export default function Question({ tab, active }) {
         console.log(err);
       }
     };
-    
+
     fetchData();
+    const handleQuestion = () => {
+      if (data[qactive] !== undefined) {
+        setQuestion(data[active][tab] || []);
+      } else {
+        setQuestion([]);
+      }
+      setQActive(0);
+    };
+
     handleQuestion();
   }, [tab,active]);
-
-  const handleQuestion = () =>{
-    if (data[active] !== undefined && tab !== undefined) {
-      setQuestion(data[active][tab] || []);
-    } else {
-      setQuestion([]);
-    } 
-    setQActive(0);
-  }
 
   // console.log(tab);
 
@@ -47,7 +54,7 @@ export default function Question({ tab, active }) {
   // console.log(active);
 
   // console.log(data[active]);
-  
+
   // console.log(tab[active]);
 
   return (
@@ -62,7 +69,6 @@ export default function Question({ tab, active }) {
               </div>
               <div className="flex justify-center py-16">
                 <span className="px-4 text-white text-xl">
-                  
                   {question.map((question, index) =>
                     qactive === index ? (
                       <div key={index}>{question}</div>
