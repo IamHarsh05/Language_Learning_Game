@@ -59,7 +59,7 @@ export default function Quiz() {
     <div>
       <div className="px-4 md:px-48">
         <p className="text-3xl font-bold bg-gradient-to-t from-[#06286E] to-[#164EC0] inline-block text-transparent bg-clip-text">
-          Relations and Functions (Mathematics)
+          {t}
         </p>
       </div>
       <div className="flex justify-center p-4 md:p-8">
