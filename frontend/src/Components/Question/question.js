@@ -23,7 +23,7 @@ export default function Question({ active }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("http://localhost:8000/questions", {
+        const res = await fetch(process.env.REACT_APP_API, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         });

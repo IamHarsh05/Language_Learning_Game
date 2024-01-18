@@ -1,6 +1,6 @@
 // api.js
 
-const apiUrl = "http://localhost:8000/questions";
+const apiUrl = process.env.REACT_APP_API;
 
 let data = [];
 

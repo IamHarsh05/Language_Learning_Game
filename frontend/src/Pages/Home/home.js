@@ -32,7 +32,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("http://localhost:8000/questions", {
+        const res = await fetch(process.env.REACT_APP_API, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         });
@@ -57,15 +57,15 @@ export default function Home() {
   // console.log(data[0][tab])
 
   return (
-    <div className="home w-screen py-2 flex flex-col md:flex-row overflow-scroll">
+    <div className="home w-screen md:p-64 flex flex-col md:flex-row overflow-hidden overflow-x-scroll">
       {tabs.map((t, i) => (
-        <div className="flex justify-center p-2">
+        <div className="flex justify-center p-2" key={i}>
           <div
             className="flex flex-col md:flex-row p-8 bg-gradient-to-tl from-[#06286E] to-[#164EC0] rounded-3xl text-white"
             onClick={() => handleClick(t)}
             key={i}
           >
-            <Link to={`/${t}`} key={i}>
+            <Link to={`/${t}`}>
               <p>Language: {t} </p>
             </Link>
             <p>No. of Questions: {data[i][t].length}</p>
