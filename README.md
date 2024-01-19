@@ -56,7 +56,7 @@ Install the dependencies:
 # setup Frontend:
 
 Change into the project directory:
-### `cd fackend`
+### `cd frontend`
 
 Install the dependencies:
 ### `npm install`
