@@ -12,7 +12,7 @@ import quiz5 from "../assets/quiz5.png";
 import quiz6 from "../assets/quiz6.png";
 import quiz7 from "../assets/quiz7.png";
 
-function DeshboardStudent({ setsonequiz, isAuth, setIsAuth }) {
+function Deshboardstudent({ setsonequiz, isAuth, setIsAuth }) {
   const textcolor = [
     "text-primary",
     "text-success",
@@ -90,4 +90,4 @@ function DeshboardStudent({ setsonequiz, isAuth, setIsAuth }) {
   );
 }
 
-export default DeshboardStudent;
+export default Deshboardstudent;

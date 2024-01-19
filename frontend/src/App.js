@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import NavBar from "./components/Navbar";
-import Register from "./components/Register";
-import Newquiz from "./components/Newquiz";
-import Joinquiz from "./components/Joinquiz";
-import DashboardTeacher from "./components/DashboardTeacher";
-import DeshboardStudent from "./components/DeshboardStudent";
-import Sonequiz from "./components/sonequiz";
-import Tonequiz from "./components/tonequiz";
-import Home from "./components/Home";
+import Home from "./Component/Home";
+import Header from "./Component/Navbar";
+import Dashboardteacher from "./Component/DashboardTeacher";
+import Deshboardstudent from "./Component/DeshboardStudent";
+import Tonequiz from "./Component/tonequiz";
+import Newquiz from "./Component/Newquiz";
+import Joinquiz from "./Component/Joinquiz";
+import Sonequiz from "./Component/sonequiz";
+import Register from "./Component/Register";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -24,13 +24,13 @@ function App() {
           {role === "1" ? (
             <>
               <Router>
-                <NavBar isAuth={isAuth} setIsAuth={setIsAuth} role={role} />
+                <Header isAuth={isAuth} setIsAuth={setIsAuth} role={role} />
                 <Routes>
                   <Route
                     exact
                     path="*"
                     element={
-                      <DashboardTeacher
+                      <Dashboardteacher
                         isAuth={isAuth}
                         setIsAuth={setIsAuth}
                         settonequiz={settonequiz}
@@ -58,13 +58,13 @@ function App() {
             </>
           ) : (
             <Router>
-              <NavBar isAuth={isAuth} setIsAuth={setIsAuth} role={role} />
+              <Header isAuth={isAuth} setIsAuth={setIsAuth} role={role} />
               <Routes>
                 <Route
                   exact
                   path="*"
                   element={
-                    <DeshboardStudent
+                    <Deshboardstudent
                       isAuth={isAuth}
                       setIsAuth={setIsAuth}
                       setsonequiz={setsonequiz}
@@ -94,7 +94,7 @@ function App() {
       ) : (
         <>
           <Router>
-            <NavBar isAuth={isAuth} setIsAuth={setIsAuth} role={role} />
+            <Header isAuth={isAuth} setIsAuth={setIsAuth} role={role} />
             {token && <Register setIsAuth={setIsAuth} />}
             <Routes>
               <Route

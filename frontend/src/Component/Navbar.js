@@ -5,7 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-function NavBar({ isAuth, setIsAuth, role }) {
+function Header({ isAuth, setIsAuth, role }) {
   const username = localStorage.getItem("name");
   const navigate = useNavigate();
 
@@ -94,4 +94,4 @@ function NavBar({ isAuth, setIsAuth, role }) {
   );
 }
 
-export default NavBar;
+export default Header;

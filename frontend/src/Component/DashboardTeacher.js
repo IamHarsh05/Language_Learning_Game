@@ -12,7 +12,7 @@ import quiz5 from "../assets/quiz5.png";
 import quiz6 from "../assets/quiz6.png";
 import quiz7 from "../assets/quiz7.png";
 
-function DashboardTeacher({ settonequiz, isAuth, setIsAuth }) {
+function Dashboardteacher({ settonequiz, isAuth, setIsAuth }) {
   const textcolor = [
     "text-primary",
     "text-success",
@@ -90,4 +90,4 @@ function DashboardTeacher({ settonequiz, isAuth, setIsAuth }) {
   );
 }
 
-export default DashboardTeacher;
+export default Dashboardteacher;
