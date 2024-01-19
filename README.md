@@ -30,3 +30,38 @@
 
 ### Student Details With thier Score
 ![Home Page](./Demo/ranks.png "Ranks Page")
+
+
+## Setup In Local Environment
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+
+## Installation
+
+### Clone the repository:
+
+## run this command in root folder
+
+# setup backend(server):
+
+Change into the project directory:
+### `cd backend`
+
+Install the dependencies:
+### `npm install`
+
+# setup Frontend:
+
+Change into the project directory:
+### `cd fackend`
+
+Install the dependencies:
+### `npm install`
+
+##Usage
+To run the application, use the following command in both directories:
+### `npm start`
+
