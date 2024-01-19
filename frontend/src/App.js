@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
 import NavBar from "./components/Navbar";
 import Register from "./components/Register";
 import Newquiz from "./components/Newquiz";
@@ -9,6 +8,7 @@ import DashboardTeacher from "./components/DashboardTeacher";
 import DeshboardStudent from "./components/DeshboardStudent";
 import Sonequiz from "./components/sonequiz";
 import Tonequiz from "./components/tonequiz";
+import Home from "./components/Home";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
