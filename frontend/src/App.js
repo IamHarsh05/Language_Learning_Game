@@ -1,33 +1,116 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import Navbar from "./Components/Navbar/navbar";
-import Home from "./Pages/Home/home";
-import Exam from "./Pages/Exam/exam";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import NavBar from "./components/Navbar";
+import Register from "./components/Register";
+import Newquiz from "./components/Newquiz";
+import Joinquiz from "./components/Joinquiz";
+import DashboardTeacher from "./components/DashboardTeacher";
+import DeshboardStudent from "./components/DeshboardStudent";
+import Sonequiz from "./components/sonequiz";
+import Tonequiz from "./components/tonequiz";
 
 function App() {
-  
-  const tab = useSelector((state) => state.tab.tab);
-  console.log(tab)
+  const [isAuth, setIsAuth] = useState(false);
+  const role = localStorage.getItem("role");
+  const token = localStorage.getItem("token");
+  const [sonequiz, setsonequiz] = useState([]);
+  const [tonequiz, settonequiz] = useState([]);
 
   return (
     <div className="App">
-      <Router>
-        <div className="relative flex flex-col overflow-hidden">
-          <div className="fixed top-0 left-0 right-0 bg-white z-50">
-            <Navbar className=" z-50 w-full" />
-          </div>
-          <div className="pt-16 bg-gray-100 h-scrren">
-            <Link to={`/`}>
-              <button>Go Back</button>
-            </Link>
+      {isAuth ? (
+        <>
+          {role === "1" ? (
+            <>
+              <Router>
+                <NavBar isAuth={isAuth} setIsAuth={setIsAuth} role={role} />
+                <Routes>
+                  <Route
+                    exact
+                    path="*"
+                    element={
+                      <DashboardTeacher
+                        isAuth={isAuth}
+                        setIsAuth={setIsAuth}
+                        settonequiz={settonequiz}
+                      />
+                    }
+                  ></Route>
+                  <Route
+                    exact
+                    path="/newquiz"
+                    element={<Newquiz setIsAuth={setIsAuth} />}
+                  ></Route>
+                  <Route
+                    exact
+                    path="/tonequiz"
+                    element={
+                      <Tonequiz
+                        isAuth={isAuth}
+                        setIsAuth={setIsAuth}
+                        tonequiz={tonequiz}
+                      />
+                    }
+                  ></Route>
+                </Routes>
+              </Router>
+            </>
+          ) : (
+            <Router>
+              <NavBar isAuth={isAuth} setIsAuth={setIsAuth} role={role} />
+              <Routes>
+                <Route
+                  exact
+                  path="*"
+                  element={
+                    <DeshboardStudent
+                      isAuth={isAuth}
+                      setIsAuth={setIsAuth}
+                      setsonequiz={setsonequiz}
+                    />
+                  }
+                ></Route>
+                <Route
+                  exact
+                  path="/joinquiz"
+                  element={<Joinquiz setIsAuth={setIsAuth} />}
+                ></Route>
+                <Route
+                  exact
+                  path="/sonequiz"
+                  element={
+                    <Sonequiz
+                      isAuth={isAuth}
+                      setIsAuth={setIsAuth}
+                      sonequiz={sonequiz}
+                    />
+                  }
+                ></Route>
+              </Routes>
+            </Router>
+          )}
+        </>
+      ) : (
+        <>
+          <Router>
+            <NavBar isAuth={isAuth} setIsAuth={setIsAuth} role={role} />
+            {token && <Register setIsAuth={setIsAuth} />}
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path={tab !== null ? `/${tab}` : '/'} element={tab !== null ? <Exam /> : <Home />} />
+              <Route
+                exact
+                path="*"
+                element={<Home setIsAuth={setIsAuth} />}
+              ></Route>
+              <Route
+                exact
+                path="/register"
+                element={<Register setIsAuth={setIsAuth} />}
+              ></Route>
             </Routes>
-          </div>
-        </div>
-      </Router>
+          </Router>
+        </>
+      )}
     </div>
   );
 }

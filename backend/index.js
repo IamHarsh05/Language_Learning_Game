@@ -1,64 +1,26 @@
-const express = require('express');
-const app = express();
+const express = require("express");
 const cors = require("cors");
-const bodyParser = require('body-parser'); 
-const Questions = require("./Model/questions");
-const port = 8000;
+const dbConnection = require("./configs/db.config");
+const dotenv = require("dotenv");
+dotenv.config();
 
-app.use(bodyParser.json());
+const authRouter = require("./routes/auth.route");
+const teacherRouter = require("./routes/teacher.route");
+const studentRouter = require("./routes/student.route");
+const { tokenVerification } = require("./middlewares/token.verification");
+
+const app = express();
+dbConnection();
+
 app.use(cors());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
-// Create a new item
-app.post('/questions', async (req, res) => {
-  try {
-    const newExam = new Questions(req.body);
-    await newExam.save();
-    res.status(201).json(newExam);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+app.use("/api/verify", tokenVerification);
+app.use("/api/auth", authRouter);
+app.use("/api/teacher", teacherRouter);
+app.use("/api/student", studentRouter);
 
-// Get all items
-app.get('/questions', async (req, res) => {
-  try {
-    const items = await Questions.find();
-    res.json(items);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Get a specific item by ID
-app.get('/questions/:id', async (req, res) => {
-  try {
-    const item = await Questions.findById(req.params.id);
-    res.json(item);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  } 
-});
-
-// Update an item by ID
-app.put('/questions/:id', async (req, res) => {
-  try {
-    const updatedItem = await Questions.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json(updatedItem);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Delete an item by ID
-app.delete('/questions/:id', async (req, res) => {
-  try {
-    const deletedItem = await Questions.findByIdAndDelete(req.params.id);
-    res.json(deletedItem);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-app.listen(port, () =>{
-    console.log("Backend Is Running", port);
+app.listen("5000", () => {
+  console.log("server starting");
 });
